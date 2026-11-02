@@ -41,13 +41,29 @@ for g,r in rows:
     nt=int(r.n_in_test) if pd.notna(r.n_in_test) else '—'; nh=int(r.n_hap_ge5) if pd.notna(r.n_hap_ge5) else '—'
     dag=' †' if g in ('RFT1','Hd3a') else ''
     tr+=f'<tr{cls}><td><a href="#{g}">{html.escape(disp(g))}</a>{dag}</td><td>{ids[g]}</td><td>{zone[g]}</td><td>{int(r.n_sites_used)}</td><td>{nt}</td><td>{nh}</td><td>{f(r.logit_LRT_p)}{flag}</td><td>{f(r.logit_LRT_FDR)}</td><td>{f(r.OLS_dDTF_p)}</td><td>{f(r.OLS_dDTF_FDR)}</td></tr>'
+SNPX=R+'SNP_haplotype_tables.xlsx'
+def _tbl(df,hapcols=()):
+    h='<tr>'+''.join(f'<th>{html.escape(str(c))}</th>' for c in df.columns)+'</tr>'
+    b=''
+    for _,x in df.iterrows():
+        fx=' class="fx"' if str(x.get('impact',''))in('MODERATE','HIGH') else ''
+        b+=f'<tr{fx}>'+''.join((f'<td class="{"r" if v=="REF" else "a"}">{v}</td>' if c in hapcols and isinstance(v,str) else f'<td>{"" if pd.isna(v) else html.escape(str(v))}</td>') for c,v in x.items())+'</tr>'
+    return '<div class="sc"><table>'+h+b+'</table></div>'
+def snp_section():
+    out='<h2>SNP / indel haplotype tables</h2><div class="card"><p>Alleles at each site (gene ±2 kb, sites used in the analysis) for each haplotype with n≥5. <b>REF</b> = reference-genome (Nipponbare) allele (blue), <b>ALT</b> = alternative (red); bold rows change the protein (MODERATE/HIGH, snpEff). H1 = most frequent haplotype. Accessions heterozygous or missing at a used site are excluded. Download: <a href="data/SNP_haplotype_tables.xlsx">SNP_haplotype_tables.xlsx</a>.</p>'
+    for g,title in [('RFT1','RFT1 (Os06g0157500)'),('Hd3a','Hd3a (Os06g0157700)')]:
+        hs=pd.read_excel(SNPX,g+'_haplotypes'); sn=pd.read_excel(SNPX,g+'_SNPs')
+        hc=[c for c in sn.columns if c.startswith('H') and c[1:].isdigit()]
+        out+=f'<details><summary>{title} — {len(sn)} sites, {len(hs)} haplotypes</summary>'+_tbl(hs.rename(columns={'median_dDTF':'median ΔDTF'}))+_tbl(sn[['pos','REF','ALT','region','effect','impact','hgvsp','MAF_in_223']+hc],hc)+'</details>'
+    out+='<details><summary>Hd1 deletions (chr6)</summary>'+_tbl(pd.read_excel(SNPX,'Hd1_sites'))+_tbl(pd.read_excel(SNPX,'Hd1_groups').rename(columns={'median_dDTF':'median ΔDTF'}))+'<p>Hd1 = NP if the accession carries deletion A or B; no accession carries both.</p></details>'
+    return out+'<p class="note">Sites shown are those passing the analysis filters (missing ≤10%, heterozygous ≤5%, MAF ≥0.05 in the 223 accessions); association only, no causal claim.</p></div>'
 css='''<style>:root{--bg:#F6F8F3;--surface:#fff;--border:#DCE3D4;--text:#17201A;--muted:#566257;--accent:#2F7A46;--hero1:#123A22;--hero2:#2F7A46;--code:#EAEFE4;--warn:#B45309}
 @media (prefers-color-scheme:dark){:root{--bg:#0F1611;--surface:#172019;--border:#2A3A2E;--text:#E8EFE6;--muted:#9FB0A2;--accent:#5DBB7A;--hero1:#0B2214;--hero2:#1E5A30;--code:#223326;--warn:#F59E0B}}
 *{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
 header{background:linear-gradient(135deg,var(--hero1),var(--hero2));color:#fff;padding:36px 20px}header .in,main{max-width:1100px;margin:0 auto;padding:0 20px}header h1{margin:0 0 6px;font-size:1.7rem}header p{margin:0;opacity:.85}
 main{padding-top:20px;padding-bottom:50px}.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin:16px 0}h2{margin:28px 0 8px}h3{margin:0 0 8px}.m{font-weight:400;font-size:.82rem;color:var(--muted);margin-left:8px}
 img{max-width:100%;height:auto;display:block;margin:6px 0}table{border-collapse:collapse;width:100%;font-size:.86rem}th,td{border-bottom:1px solid var(--border);padding:5px 8px;text-align:left}th{color:var(--muted)}.ht{width:auto;margin-top:6px}
-.sc{overflow-x:auto}tr.hi td{background:rgba(47,122,70,.12)}.w{color:var(--warn);font-size:.75rem;font-weight:700}.note{border-left:4px solid var(--warn);padding-left:12px}a{color:var(--accent)}</style>'''
+.sc{overflow-x:auto}tr.hi td{background:rgba(47,122,70,.12)}.w{color:var(--warn);font-size:.75rem;font-weight:700}.note{border-left:4px solid var(--warn);padding-left:12px}a{color:var(--accent)}details{margin:10px 0}summary{cursor:pointer;font-weight:600}td.r{background:rgba(36,113,163,.14)}td.a{background:rgba(192,57,43,.14)}tr.fx td:first-child{font-weight:700}.sc table td,.sc table th{white-space:nowrap}</style>'''
 body=('<div class="card note"><b>Preliminary / not validated.</b> Exploratory results from one panel (223 accessions with ΔDTF-based groups), computed and checked only by the analysis team. Associations are not evidence of causation: the strongest signal (RFT1) is partly entangled with population structure, and there is no external validation yet.</div>'
 '<h2>Method in brief</h2><div class="card"><ul>'
 '<li><b>Samples:</b> accessions classified from the flowering-date sheet: photosensitive (PS, ΔDTF&gt;35 d, n=150) or non-photosensitive (NPS, ΔDTF&lt;34 d, n=73); 34–35 d and missing ΔDTF excluded; one accession with conflicting rows dropped. Accession names/IDs are not shown.</li>'
@@ -65,6 +81,7 @@ body=('<div class="card note"><b>Preliminary / not validated.</b> Exploratory re
 '<tr><td>NP, deletion B</td><td>alt</td><td>6</td><td>2</td><td>4</td><td>32</td></tr><tr><td>NP, deletion B</td><td>ref</td><td>13</td><td>0</td><td>13</td><td>15</td></tr></table></div>'
 '<p>Within both Hd1 = P (Mann–Whitney p = 0.001; PC1–5-adjusted OLS p = 2.1e-05) and Hd1 = NP (p = 7.7e-06; adjusted p = 0.0013), the ref haplotype has lower ΔDTF than alt. The overall difference among the six groups (Kruskal–Wallis p = 1.8e-22) is mostly the known Hd1 P vs NP difference. p-values are per comparison and uncorrected for multiple testing.</p>'
 '<p class="note">Association, not causation: ref carriers are mostly Hd1 NP (28 of 42, vs 30 of 157 for alt) and could not be matched well on ancestry; groups are small (n = 6–15 in four of the six); no external validation.</p></div>'
++snp_section()+
 '<h2>Per-gene boxplots</h2><p style="color:var(--muted)">Each point is one accession; red = PS, blue = NPS; dashed line = 34.5 d (group cut-off). Labels above boxes: n and PS/NPS counts. Tables: PS and NPS counts, number with Hd1 NP, median ΔDTF.</p>'+''.join(cards))
 page='<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Flowering-time haplotypes — Results</title>'+css+'</head><body><header><div class="in"><h1>Haplotype analysis of 28 flowering-pathway genes</h1><p>ΔDTF and photosensitivity by haplotype, controlling for Hd1 — preliminary results (draft, 2026-11-02)</p></div></header><main>'+body+'</main></body></html>'
 open('site/index.html','w',encoding='utf-8').write(page)
