@@ -17,7 +17,7 @@ Hd3a,6,2938463,C,T,SNP,upstream (5'),0.076,0.0
 Hd3a,6,2938625,G,A,SNP,upstream (5'),0.097,0.0
 Hd3a,6,2941669,T,G,SNP,within gene,0.061,0.0
 Hd3a,6,2942292,C,A,SNP,within gene,0.241,0.0
-Hd3a,6,2942617,G,GCATATGCA...,indel/MNP,downstream (3'),0.2,2.9
+Hd3a,6,2942617,G,GCATATGCATGCAATATTGGTAT,indel/MNP,downstream (3'),0.2,2.9
 RFT1,6,2927659,GTA,"G,GTATA",indel/MNP,within gene,0.098,0.7
 RFT1,6,2927954,G,"T,A",SNP,within gene,0.072,0.0
 OsATG8b,4,31714428,A,G,SNP,downstream (3'),0.399,0.0
@@ -47,7 +47,7 @@ OsATG8b,4,31719837,G,A,SNP,upstream (5'),0.13,0.7
 OsATG8b,4,31719850,C,T,SNP,upstream (5'),0.409,1.4
 OsATG8b,4,31719858,T,C,SNP,upstream (5'),0.36,2.2
 OsATG8b,4,31719881,GAAACGAACAT,"G,GACAT",indel/MNP,upstream (5'),0.315,2.9
-OsATG8b,4,31720033,CAAGATGCA...,"TAAGATGCA...,C",indel/MNP,upstream (5'),0.108,0.0
+OsATG8b,4,31720033,CAAGATGCATAATGT,"TAAGATGCATAATGT,C",indel/MNP,upstream (5'),0.108,0.0
 OsATG8b,4,31720245,G,T,SNP,upstream (5'),0.176,0.0
 OsATG8b,4,31720635,G,T,SNP,upstream (5'),0.232,2.2
 OsATG8b,4,31720643,G,"A,*",SNP,upstream (5'),0.097,0.0
@@ -62,7 +62,7 @@ OsATG8b,4,31720916,C,"T,*",SNP,upstream (5'),0.061,0.0
 OsATG8b,4,31720918,C,"T,*",SNP,upstream (5'),0.083,0.0
 OsATG8b,4,31720921,C,"T,*",SNP,upstream (5'),0.306,0.0
 OsATG8b,4,31720961,G,A,SNP,upstream (5'),0.137,0.0
-OsATG8c,8,5363491,C,CATTTAATG...,indel/MNP,upstream (5'),0.232,2.2
+OsATG8c,8,5363491,C,CATTTAATGTAATTAAG,indel/MNP,upstream (5'),0.232,2.2
 OsATG8c,8,5365464,T,C,SNP,within gene,0.313,0.0
 OsATG8c,8,5366935,G,A,SNP,downstream (3'),0.191,0.0
 OsATG8c,8,5367152,C,"G,T",SNP,downstream (3'),0.331,0.0
