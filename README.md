@@ -6,3 +6,5 @@ Preliminary (draft 2026-11-04, not validated): ∆DTF distributions of P vs NP a
 - `figures/` — ∆DTF histograms (PNG, PDF)
 - `img/` — OsATG8c / OsATG8b haplotype boxplots
 - `data/` — downloadable tables (xlsx, csv; `data/snp_regression/` for the SNP regression, `data/per_gene/` for the single-gene haplotypes)
+
+Sections 8–10 use the flowering date in short day (SD) and long day (LD) in 146 accessions: core block + one gene (8), OsATG8a alone (9), every gene alone (10); data in `data/sd146/`, `data/ld146/`, `data/per_gene_sd146/`, `data/per_gene_ld146/`.
