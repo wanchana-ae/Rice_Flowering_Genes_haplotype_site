@@ -1,0 +1,22 @@
+LD-pruned (r2<0.2) SNPs used for kinship/PCs: 81093
+
+=== SD === SNPs tested (GEMMA, biallelic SNP, MAF>=5%, missing<=10% in the 146): 1907893
+p_lrt: lambda=1.177  min p=1.78e-08  n(p<1e-5)=73  n(p<6.2e-07 Bonf pruned)=4  n(p<2.6e-08 Bonf all)=3
+p_wald: lambda=1.149  min p=2.62e-08  n(p<1e-5)=64  n(p<6.2e-07 Bonf pruned)=3  n(p<2.6e-08 Bonf all)=0
+p_lrt_int: lambda=1.153  min p=4.52e-07  n(p<1e-5)=156  n(p<6.2e-07 Bonf pruned)=3  n(p<2.6e-08 Bonf all)=0
+p_lrt_noA: lambda=1.165  min p=3.18e-08  n(p<1e-5)=42  n(p<6.2e-07 Bonf pruned)=3  n(p<2.6e-08 Bonf all)=0
+p_glm: lambda=1.487  min p=4.55e-09  n(p<1e-5)=1236  n(p<6.2e-07 Bonf pruned)=68  n(p<2.6e-08 Bonf all)=2
+Spearman of p: LMM(lrt) vs GLM+PC+A = 0.412; LMM vs INT = 0.747; LMM(+A) vs LMM(no A) = 0.894
+loci (p_lrt<1e-5 merged within 100 kb): 14; top 10 -> SD_loci_p1e-5.csv
+candidate genes (gene +/-2 kb) min p_lrt: OsMADS14 0.00035 (n=77); LHD3 0.00035 (n=74); OsATG8e 0.00094 (n=8); SDG711 0.001 (n=92); DTH8 0.0016 (n=26); OsLHY 0.0073 (n=71); OsPRR37 0.0095 (n=37); Hd1 0.012 (n=24)
+
+=== LD === SNPs tested (GEMMA, biallelic SNP, MAF>=5%, missing<=10% in the 146): 1907893
+p_lrt: lambda=1.267  min p=1.04e-07  n(p<1e-5)=233  n(p<6.2e-07 Bonf pruned)=26  n(p<2.6e-08 Bonf all)=0
+p_wald: lambda=1.241  min p=1.47e-07  n(p<1e-5)=230  n(p<6.2e-07 Bonf pruned)=21  n(p<2.6e-08 Bonf all)=0
+p_lrt_int: lambda=1.296  min p=3.72e-07  n(p<1e-5)=339  n(p<6.2e-07 Bonf pruned)=9  n(p<2.6e-08 Bonf all)=0
+p_lrt_noA: lambda=1.256  min p=1.56e-10  n(p<1e-5)=2384  n(p<6.2e-07 Bonf pruned)=311  n(p<2.6e-08 Bonf all)=95
+p_glm: lambda=1.386  min p=6.46e-09  n(p<1e-5)=1214  n(p<6.2e-07 Bonf pruned)=85  n(p<2.6e-08 Bonf all)=5
+Spearman of p: LMM(lrt) vs GLM+PC+A = 0.448; LMM vs INT = 0.817; LMM(+A) vs LMM(no A) = 0.505
+loci (p_lrt<1e-5 merged within 100 kb): 58; top 10 -> LD_loci_p1e-5.csv
+candidate genes (gene +/-2 kb) min p_lrt: LHD3 0.00018 (n=74); OsMADS14 0.00028 (n=77); ABF1 0.00084 (n=43); OsATG8e 0.0014 (n=8); OsATG8c 0.0019 (n=42); TAC1 0.0028 (n=60); OsATG8a 0.015 (n=21); OsATG8b 0.022 (n=69)
+GEMMA PVE chr1 models: pve estimate =0.948113; se(pve) =0.0911346; pve estimate =0.94211; se(pve) =0.0845068; pve estimate =0.999978; se(pve) =0.000677372; pve estimate =0.999978; se(pve) =0.000515319; pve estimate =0.999978; se(pve) =0.00121083; pve estimate =0.999978; se(pve) =0.00050919
