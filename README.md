@@ -5,3 +5,5 @@ Preliminary (draft 2026-11-05, not validated): haplotype analyses of the floweri
 - `index.html` — results page
 - `figures/`, `img/` — figures
 - `data/` — downloadable tables (csv, xlsx)
+
+Visual style: paper theme adapted from the design ideas and colour tokens of [Looseleaf](https://github.com/kevintngo/looseleaf) by Kevin Ngo (MIT licence); CSS only, no code or fonts copied.
